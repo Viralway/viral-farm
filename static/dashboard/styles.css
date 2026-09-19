@@ -120,8 +120,6 @@ svg { display: block; flex: none; }
 .nav-item span { margin-left: 10px; }
 .nav-item .count { margin-left: auto; font-size: 12px; font-weight: 500; color: var(--gray-11); }
 .nav-group-end { margin-top: auto; }
-.sidebar-footer { padding: 16px 12px 20px; font-size: 12px; line-height: 1rem; color: var(--gray-10); }
-.sidebar-footer a { color: var(--gray-12); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
 
 .main { grid-area: main; display: flex; flex-direction: column; min-width: 0; height: 100dvh; min-height: 0; }
 .topbar {

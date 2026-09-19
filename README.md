@@ -19,6 +19,14 @@
   <a href="#docs">Docs</a>
 </p>
 
+<p align="center">
+  <img src="static/dashboard/assets/img/demo_img.png" alt="Viral Farm dashboard" width="800"/>
+</p>
+
+<p align="center">
+  <video src="static/dashboard/assets/img/demo_vid.mp4" width="800" controls muted playsinline></video>
+</p>
+
 ---
 
 ## What it is

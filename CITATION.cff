@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: Viral Farm
+message: If you use this software, please cite it using these metadata.
+type: software
+authors:
+  - name: Viralway
+version: 0.1.0-review.0
+date-released: "2026-09-19"
+license: Apache-2.0
+abstract: A self-hosted iOS device farm for live screens, scheduling, and TikTok automation.
+keywords:
+  - ios
+  - device-farm
+  - automation
+  - tiktok
