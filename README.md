@@ -23,9 +23,7 @@
   <img src="static/dashboard/assets/img/demo_img.png" alt="Viral Farm dashboard" width="800"/>
 </p>
 
-<p align="center">
-  <video src="static/dashboard/assets/img/demo_vid.mp4" width="800" controls muted playsinline></video>
-</p>
+https://github.com/user-attachments/assets/d16fab01-2051-4058-9f0f-a8009e42de14
 
 ---
 
