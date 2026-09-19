@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>Device · Viralway</title>
+    <link rel="icon" type="image/png" href="/assets/img/viralway.png">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/htmx.min.js" defer></script>
+    <script type="module" src="/assets/shell.js"></script>
+</head>
+<body class="dashboard-grid">
+    <script>(function(){var m=document.cookie.match(/\W?theme=(\w+)/);document.body.classList.add(m&&m[1]==='dark'?'dark':'light');})();</script>
+    <aside class="sidebar">
+        <a class="sidebar-logo" href="/">__LOGO__</a>
+        __SIDEBAR_NAV__
+        <div class="sidebar-footer">__FOOTER__</div>
+    </aside>
+    <header class="mobile-header">
+        <a href="/" aria-label="Viralway">__LOGO_BADGE__</a>
+        <div class="topbar-actions">__AUTH_ICON__</div>
+    </header>
+    <div class="main">
+        <header class="topbar">
+            <h1 id="page-title" class="page-title">Device</h1>
+            <div class="topbar-actions">
+                __THEME_TOGGLE__
+                <details class="menu">
+                    <summary class="icon-circle" data-tooltip="More" aria-label="More">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    </summary>
+                    <div class="menu-content" role="menu">
+                        <button id="open-tasks" class="menu-item" type="button" role="menuitem"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>Tasks &amp; schedules</button>
+                        <button id="open-accounts" class="menu-item" type="button" role="menuitem"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Accounts</button>
+                        <button id="open-passcode" class="menu-item" type="button" role="menuitem"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Passcode</button>
+                        <button id="open-calibrate" class="menu-item" type="button" role="menuitem"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>Touch points</button>
+                        <div class="menu-separator" role="separator"></div>
+                        <button id="open-remove" class="menu-item" type="button" role="menuitem"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>Remove device</button>
+                    </div>
+                </details>
+            </div>
+        </header>
+        <main class="well-wrap">
+            <div class="well-cap" aria-hidden="true"></div>
+            <div class="well">
+                <div class="page" data-device-udid="__DEVICE_UDID__">
+                    <section id="device-summary" class="panel device-summary loading-card"
+                        hx-get="/api/devices/__DEVICE_UDID__/fragments/summary" hx-trigger="load" hx-swap="outerHTML">
+                        <span class="spinner" aria-hidden="true"></span>Loading device details…
+                    </section>
+                    <div class="workspace-grid">
+                        <section class="panel remote-panel">
+                            <div class="section-heading">
+                                <div class="card-head"><h2 class="card-title">Device screen</h2><p class="card-description">Click to tap, drag to swipe.</p></div>
+                                <div class="inline-actions">
+                                    <button id="refresh" class="button secondary xs" type="button">Reconnect</button>
+                                    <button id="toggle" class="button secondary xs" type="button">Pause stream</button>
+                                </div>
+                            </div>
+                            <div class="stream-workspace">
+                                <div class="phone"><img id="screen" alt="Live screen from the connected iPhone" draggable="false"></div>
+                                <div class="remote-controls" aria-label="Device navigation controls">
+                                    <div class="swipe-pad">
+                                        <button class="remote-button up" type="button" data-remote-action="up" data-tooltip="Swipe up" aria-label="Swipe up"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
+                                        <button class="remote-button left" type="button" data-remote-action="left" data-tooltip="Swipe left" aria-label="Swipe left"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+                                        <span class="pad-center" aria-hidden="true"></span>
+                                        <button class="remote-button right" type="button" data-remote-action="right" data-tooltip="Swipe right" aria-label="Swipe right"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+                                        <button class="remote-button down" type="button" data-remote-action="down" data-tooltip="Swipe down" aria-label="Swipe down"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></button>
+                                    </div>
+                                    <div class="system-controls">
+                                        <button class="remote-button labeled" type="button" data-remote-action="home"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
+                                        <button class="remote-button labeled" type="button" data-remote-action="lock"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg>Power off</button>
+                                        <button class="remote-button labeled" type="button" data-remote-action="wake"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Power on</button>
+                                        <button class="remote-button labeled" type="button" data-remote-action="unlock"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>Unlock</button>
+                                        <button class="remote-button labeled" type="button" data-remote-action="volumeUp"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>Volume up</button>
+                                        <button class="remote-button labeled" type="button" data-remote-action="volumeDown"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Volume down</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="status" class="stream-status status"><span class="dot"></span><span>Waiting for device details…</span></div>
+                        </section>
+                        <div class="action-stack">
+                            <section class="panel action-card">
+                                <div class="card-head"><h2 class="card-title">Doomscroll</h2><p class="card-description">Run a timed, personality-driven scrolling session on this device.</p></div>
+                                <button id="open-doomscroll" class="button secondary sm" type="button">Configure</button>
+                            </section>
+                            <section class="panel action-card">
+                                <div class="card-head"><h2 class="card-title">Create a post</h2><p class="card-description">Upload a video or slideshow, then save it as a draft or publish it.</p></div>
+                                <button id="open-post" class="button secondary sm" type="button">Prepare post</button>
+                            </section>
+                            <section class="panel">
+                                <div class="card-head"><h2 class="card-title">Automation log</h2><p class="card-description">Live output from the latest run on this device.</p></div>
+                                <section id="device-activity" class="run-panel loading-card"
+                                    hx-get="/api/devices/__DEVICE_UDID__/fragments/activity" hx-trigger="load" hx-swap="outerHTML">
+                                    <span class="spinner" aria-hidden="true"></span>Loading recent activity…
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <nav class="mobile-tabbar" aria-label="Navigation">__TAB_NAV__</nav>
+
+    <dialog id="tasks-dialog">
+        <div class="modal tasks-modal">
+            <header class="modal-head">
+                <div><h2>Tasks &amp; schedules</h2><p>Schedules and recent runs on this device.</p></div>
+                <button id="close-tasks" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="field"><span class="list-label">Schedules</span><div id="device-schedules" class="task-list loading-card"><span class="spinner" aria-hidden="true"></span>Loading schedules…</div></div>
+                <div class="field"><span class="list-label">Recent runs</span><div id="device-executions" class="task-list loading-card"><span class="spinner" aria-hidden="true"></span>Loading task history…</div></div>
+            </div>
+            <footer class="form-actions"><a href="/tasks" class="button secondary sm">View all tasks</a></footer>
+        </div>
+    </dialog>
+    <dialog id="accounts-dialog">
+        <form id="accounts-form" class="modal">
+            <header class="modal-head">
+                <div><h2>Accounts</h2><p>Handles already signed in on this device.</p></div>
+                <button id="close-accounts" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="field"><label for="device-accounts">Account handles</label><input id="device-accounts" type="text" value="__TIKTOK_ACCOUNTS_VALUE__" placeholder="@account_one, @account_two"></div>
+            </div>
+            <footer class="form-actions"><span id="accounts-result" class="run-meta" aria-live="polite"></span><button class="button primary sm" type="submit">Save</button></footer>
+        </form>
+    </dialog>
+    <dialog id="passcode-dialog">
+        <form id="passcode-form" class="modal" autocomplete="off">
+            <header class="modal-head">
+                <div><h2>Unlock passcode</h2><p>Used to wake and unlock the phone before automation. It is never shown again.</p></div>
+                <button id="close-passcode" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="field"><label for="device-passcode">Passcode <span id="passcode-state" class="run-meta">__DEVICE_HASPASSCODE__</span></label><input id="device-passcode" type="password" inputmode="numeric" autocomplete="new-password" placeholder="123456"></div>
+            </div>
+            <footer class="form-actions">
+                <span id="passcode-result" class="run-meta" aria-live="polite"></span>
+                <button id="passcode-clear" class="button secondary sm" type="button">Clear</button>
+                <button class="button primary sm" type="submit">Save</button>
+            </footer>
+        </form>
+    </dialog>
+    <dialog id="remove-dialog">
+        <form class="modal" method="dialog">
+            <header class="modal-head">
+                <div><h2>Remove device</h2></div>
+                <button id="close-remove" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body"><p>This cancels every schedule for the device and forgets its passcode, accounts and touch points. This action cannot be undone.</p></div>
+            <footer class="form-actions">
+                <span id="remove-result" class="run-meta" aria-live="polite"></span>
+                <button id="remove-device" class="button primary sm" type="button">Remove device</button>
+            </footer>
+        </form>
+    </dialog>
+    <dialog id="calibrate-dialog">
+        <form id="calibrate-form" class="modal calibrate-modal" method="dialog">
+            <header class="modal-head">
+                <div><h2>Calibrate touch points</h2><p>Pick a target, then click where it belongs on the live screen. Untouched targets use the <strong id="cal-profile">…</strong> profile.</p></div>
+                <button id="close-calibrate" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="cal-toolbar">
+                    <label class="cal-switch"><span>Control device</span><input id="cal-control" type="checkbox"><span class="cal-switch-track" aria-hidden="true"></span></label>
+                    <button id="cal-unlock" class="button secondary xs" type="button"><svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>Unlock</button>
+                </div>
+                <div class="calibrate-body">
+                    <div class="calibrate-screen"><img id="cal-screen" alt="Live screen"><div id="cal-markers" class="cal-markers" aria-hidden="true"></div></div>
+                    <ul id="cal-points" class="cal-points"></ul>
+                </div>
+                <p id="cal-status" class="run-meta" aria-live="polite"></p>
+            </div>
+            <footer class="form-actions">
+                <button id="cal-reset-all" class="button transparent sm" type="button">Reset all</button>
+                <span class="spacer"></span>
+                <button id="cal-cancel" class="button secondary sm" type="button">Cancel</button>
+                <button id="cal-save" class="button primary sm" type="button">Save</button>
+            </footer>
+        </form>
+    </dialog>
+    <dialog id="doomscroll-dialog">
+        <form id="doomscroll-form" class="modal" hx-post="/api/devices/__DEVICE_UDID__/fragments/scroll-run"
+            hx-target="#device-activity" hx-swap="outerHTML" hx-disabled-elt="button">
+            <header class="modal-head">
+                <div><h2>Configure doomscroll</h2><p>A timed, personality-driven scrolling session on this device.</p></div>
+                <button id="close-doomscroll" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="field">
+                    <label for="doomscroll-duration">Duration (minutes)</label>
+                    <input id="doomscroll-duration" name="durationMinutes" type="number" min="1" max="180" value="5" required>
+                    <div class="duration-shortcuts">
+                        <button type="button" data-doomscroll-duration="1">1 min</button>
+                        <button type="button" data-doomscroll-duration="5">5 min</button>
+                        <button type="button" data-doomscroll-duration="15">15 min</button>
+                    </div>
+                </div>
+                <div class="field"><label for="doomscroll-personality">Personality</label>
+                    <select id="doomscroll-personality" name="personality">
+                        <option value="skimmer">Skimmer</option>
+                        <option value="casual" selected>Casual</option>
+                        <option value="engaged">Engaged</option>
+                    </select>
+                </div>
+                <div class="field"><label for="doomscroll-account">TikTok account</label>
+                    <select id="doomscroll-account" name="account">
+                        <option value="">Don't switch</option>__TIKTOK_ACCOUNT_OPTIONS__
+                    </select>
+                </div>
+                <fieldset class="field"><legend>Engagement</legend><div class="choices">
+                    <label><input type="checkbox" name="likeEnabled" checked> Like videos</label>
+                    <label><input type="checkbox" name="saveEnabled" checked> Save videos</label>
+                </div></fieldset>
+                <label class="checkbox-option"><input id="doomscroll-recurring" type="checkbox"> Recurring</label>
+                <div id="doomscroll-start-options" class="field">
+                    <label for="doomscroll-start-kind">Start</label>
+                    <select id="doomscroll-start-kind"><option value="now">Now</option><option value="once">Once</option></select>
+                </div>
+                <div id="doomscroll-once-fields" class="schedule-fields" hidden>
+                    <div class="field"><label for="doomscroll-run-at">Date and time</label><input id="doomscroll-run-at" type="datetime-local"></div>
+                </div>
+                <div id="doomscroll-recurring-fields" class="schedule-fields" hidden>
+                    <div class="field"><label for="doomscroll-frequency">Repeat</label><select id="doomscroll-frequency"><option value="daily">Daily</option><option value="weekly">Weekly</option></select></div>
+                    <div class="field"><label for="doomscroll-local-time">Time</label><input id="doomscroll-local-time" name="localTime" type="time" value="09:00"></div>
+                    <fieldset id="doomscroll-weekday-fields" class="field weekday-field" hidden><legend>Days</legend><div class="weekday-options">
+                        <label><input type="checkbox" value="1" checked><span>Mon</span></label><label><input type="checkbox" value="2" checked><span>Tue</span></label>
+                        <label><input type="checkbox" value="3" checked><span>Wed</span></label><label><input type="checkbox" value="4" checked><span>Thu</span></label>
+                        <label><input type="checkbox" value="5" checked><span>Fri</span></label><label><input type="checkbox" value="6"><span>Sat</span></label>
+                        <label><input type="checkbox" value="0"><span>Sun</span></label>
+                    </div></fieldset>
+                </div>
+                <div id="doomscroll-run-window-field" class="field" hidden><label for="doomscroll-run-window">Run window (minutes)</label><input id="doomscroll-run-window" name="runWindowMinutes" type="number" min="1" max="1440" value="30"></div>
+                <input id="doomscroll-schedule-kind" name="scheduleKind" type="hidden" value="now"><input id="doomscroll-weekdays" name="weekdays" type="hidden" value="1,2,3,4,5">
+                <input id="doomscroll-run-at-iso" name="runAt" type="hidden"><input class="browser-timezone" name="timezone" type="hidden">
+                <p class="warning">Saving toggles the bookmark blindly, so a video that is already saved may be unsaved.</p>
+            </div>
+            <footer class="form-actions">
+                <button id="cancel-doomscroll" class="button secondary sm" type="button">Cancel</button>
+                <button class="button primary sm" type="submit">Start doomscroll</button>
+            </footer>
+        </form>
+    </dialog>
+    <dialog id="post-dialog">
+        <form id="post-form" class="modal">
+            <header class="modal-head">
+                <div><h2>Create post</h2><p>One video or up to three slideshow images.</p></div>
+                <button id="close-post" class="modal-close" type="button" aria-label="Close">__ICON_X__</button>
+            </header>
+            <div class="modal-body">
+                <div class="field">
+                    <label for="media">Media</label>
+                    <input id="media" name="media-picker" type="file" accept="video/*,image/*" multiple required>
+                    <ol id="media-list"></ol>
+                </div>
+                <div class="field"><label for="music-url">TikTok music URL</label><input id="music-url" type="url" placeholder="https://www.tiktok.com/music/…"></div>
+                <div class="field"><label for="caption">Caption</label><textarea id="caption" maxlength="2200" placeholder="Three things nobody tells you about…"></textarea></div>
+                <div class="field"><label for="post-account">TikTok account</label>
+                    <select id="post-account" name="account" required>
+                        <option value="" disabled selected>Choose an account</option>__TIKTOK_ACCOUNT_OPTIONS__
+                    </select>
+                </div>
+                <fieldset class="field"><legend>Finish as</legend><div class="choices">
+                    <label><input type="radio" name="destination" value="draft" checked> Save to Drafts</label>
+                    <label><input type="radio" name="destination" value="publish"> Post publicly</label>
+                </div></fieldset>
+                <label class="checkbox-option"><input id="post-recurring" type="checkbox"> Recurring</label>
+                <div id="post-start-options" class="field">
+                    <label for="post-start-kind">Start</label>
+                    <select id="post-start-kind"><option value="now">Now</option><option value="once">Once</option></select>
+                </div>
+                <div id="post-once-fields" class="schedule-fields" hidden>
+                    <div class="field"><label for="post-run-at">Date and time</label><input id="post-run-at" type="datetime-local"></div>
+                </div>
+                <div id="post-recurring-fields" class="schedule-fields" hidden>
+                    <div class="field"><label for="post-frequency">Repeat</label><select id="post-frequency"><option value="daily">Daily</option><option value="weekly">Weekly</option></select></div>
+                    <div class="field"><label for="post-local-time">Time</label><input id="post-local-time" type="time" value="09:00"></div>
+                    <fieldset id="post-weekday-fields" class="field weekday-field" hidden><legend>Days</legend><div class="weekday-options">
+                        <label><input type="checkbox" value="1" checked><span>Mon</span></label><label><input type="checkbox" value="2" checked><span>Tue</span></label>
+                        <label><input type="checkbox" value="3" checked><span>Wed</span></label><label><input type="checkbox" value="4" checked><span>Thu</span></label>
+                        <label><input type="checkbox" value="5" checked><span>Fri</span></label><label><input type="checkbox" value="6"><span>Sat</span></label>
+                        <label><input type="checkbox" value="0"><span>Sun</span></label>
+                    </div></fieldset>
+                </div>
+                <div id="post-run-window-field" class="field" hidden><label for="post-run-window">Run window (minutes)</label><input id="post-run-window" type="number" min="1" max="1440" value="30"></div>
+                <div id="publish-confirm" class="publish-confirm"><label class="checkbox-option"><input id="confirm-publish" type="checkbox"> I understand this will publish to the signed-in TikTok account.</label></div>
+                <p id="post-result" aria-live="polite"></p>
+            </div>
+            <footer class="form-actions"><button id="cancel-post" class="button secondary sm" type="button">Cancel</button><button id="submit-post" class="button primary sm" type="submit">Save to Drafts</button></footer>
+        </form>
+    </dialog>
+    <script type="module" src="/assets/device.js"></script>
+</body>
+</html>
