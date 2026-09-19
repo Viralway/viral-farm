@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  <img src="static/dashboard/assets/img/viralway.png" alt="Viralway Logo" width="170"/>
+  <img src="static/dashboard/assets/img/viral.png" alt="Viral Farm Logo" width="170"/>
 </p>
 
 <div align="center">
