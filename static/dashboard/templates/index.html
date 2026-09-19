@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>Devices · Viralway</title>
+    <link rel="icon" type="image/png" href="/assets/img/viralway.png">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/htmx.min.js" defer></script>
+    <script type="module" src="/assets/shell.js"></script>
+</head>
+<body class="dashboard-grid">
+    <script>(function(){var m=document.cookie.match(/\W?theme=(\w+)/);document.body.classList.add(m&&m[1]==='dark'?'dark':'light');})();</script>
+    <aside class="sidebar">
+        <a class="sidebar-logo" href="/">__LOGO__</a>
+        __SIDEBAR_NAV__
+        <div class="sidebar-footer">__FOOTER__</div>
+    </aside>
+    <header class="mobile-header">
+        <a href="/" aria-label="Viralway">__LOGO_BADGE__</a>
+        <div class="topbar-actions">__AUTH_ICON__</div>
+    </header>
+    <div class="main">
+        <header class="topbar">
+            <h1 id="page-title" class="page-title">Devices</h1>
+            <div class="topbar-actions">__THEME_TOGGLE__</div>
+        </header>
+        <main class="well-wrap">
+            <div class="well-cap" aria-hidden="true"></div>
+            <div class="well">
+                <div class="page">
+                    <section id="device-list" class="device-list" hx-get="/api/fragments/devices" hx-trigger="load" hx-swap="outerHTML" aria-live="polite">
+                        <div class="loading-card"><span class="spinner" aria-hidden="true"></span>Looking for connected devices…</div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    <nav class="mobile-tabbar" aria-label="Navigation">__TAB_NAV__</nav>
+</body>
+</html>
