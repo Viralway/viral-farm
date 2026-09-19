@@ -23,7 +23,12 @@
   <img src="static/dashboard/assets/img/demo_img.png" alt="Viral Farm dashboard" width="800"/>
 </p>
 
-https://github.com/user-attachments/assets/d16fab01-2051-4058-9f0f-a8009e42de14
+<div align="center">
+   <p> watch the video demo </p>   
+</div>
+
+  https://github.com/user-attachments/assets/d16fab01-2051-4058-9f0f-a8009e42de14
+
 
 ---
 
@@ -165,4 +170,6 @@ The server runs TypeScript directly through `tsx`; only the browser scripts are 
 
 ## License
 
-Apache 2.0. See [LICENSE](LICENSE).
+See [LICENSE](LICENSE).
+
+- Be sure follow viralway for more updates!!
